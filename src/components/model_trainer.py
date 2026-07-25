@@ -69,8 +69,42 @@ class model_trainer:
                 "cat boost reg":CatBoostRegressor(verbose=False),
                 "adaboost REG":AdaBoostRegressor(),
             }
+            params = {
+                "random forest": {
+                    "n_estimators": [50, 100, 200],
+                    "max_depth": [5, 10, 20]
+                },
 
-            model_report:dict=evaluate_models(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,models=models)
+                "decision tree": {
+                    "max_depth": [5, 10, 15]
+                },
+
+                "gradient boost": {
+                    "learning_rate": [0.01, 0.1],
+                    "n_estimators": [100, 200]
+                },
+
+                "k_N_reg": {
+                    "n_neighbors": [3, 5, 7]
+                },
+
+                "XGBoost": {
+                    "learning_rate": [0.01, 0.1],
+                    "n_estimators": [100, 200]
+                },
+
+                "cat boost reg": {
+                    "depth": [4, 6, 8],
+                    "iterations": [100, 200]
+                },
+
+                "adaboost REG": {
+                    "n_estimators": [50, 100],
+                    "learning_rate": [0.01, 0.1]
+                }
+            }
+
+            model_report:dict=evaluate_models(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,models=models,param=params)
 
             #to get best scoring model from dict
             best_model_score =max(sorted(model_report.values()))
