@@ -10,6 +10,7 @@ import os
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
+
 @dataclass
 class DataTransformationConfig:
     preprocessor_ob_file_path=os.path.join('artifact',"preprocessor.pkl")
@@ -18,7 +19,7 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
 
-    def get_data_tranformer_object(self):#to create an pickel file
+    def get_data_transformer_object(self):#to create an pickel file
         '''
         this function is responsible for data transformation
         
@@ -80,9 +81,10 @@ class DataTransformation:
             logging.info("obtaiing the preprocessor object")
 
 
-            preprocessor_object = self.get_data_tranformer_object()
+            preprocessor_object = self.get_data_transformer_object()
 
             target_column_name="math score"
+
             numerical_column=["writing score","reading score"]
 
             input_feature_train_df=train_df.drop(columns=[target_column_name])
@@ -95,6 +97,7 @@ class DataTransformation:
                 f"appplying the processing object on training dataframe and testing data frame "
                 )
             input_feature_train_array=preprocessor_object.fit_transform(input_feature_train_df)
+            
             input_feature_test_array=preprocessor_object.transform(input_feature_test_df)
 
             train_arr=np.c_[
