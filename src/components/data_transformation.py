@@ -26,14 +26,14 @@ class DataTransformation:
         '''
         try:
 
-            numerical_columns=["writing score","reading score"]
+            numerical_columns=["writing_score","reading_score"]
 
             categorical_columns=[
                 "gender",
-                "race/ethnicity",
-                "parental level of education",
+                "race_ethnicity",
+                "parental_level_of_education",
                 "lunch",
-                "test preparation course"
+                "test_preparation_course"
             ]
             
             num_pipeline=Pipeline(
@@ -83,7 +83,7 @@ class DataTransformation:
 
             preprocessor_object = self.get_data_transformer_object()
 
-            target_column_name="math score"
+            target_column_name="math_score"
 
             numerical_column=["writing score","reading score"]
 
@@ -108,7 +108,7 @@ class DataTransformation:
                 input_feature_test_array,np.array(target_feature_test_df)
             ]
 
-            logging.info("savong preprocessor object ")
+            logging.info("saving preprocessor object ")
 
             save_object(
                 file_path=self.data_transformation_config.preprocessor_ob_file_path,
