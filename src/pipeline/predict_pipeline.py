@@ -7,6 +7,7 @@ from src.utils import load_object
 class PredictPipeline:
     def __init__(self):
         pass
+
     def predict(self,features):
         try:
             
@@ -57,6 +58,7 @@ class CustomData:
             }
 
             return pd.DataFrame(custom_data_input_dict)
+        
         except Exception as e:
             raise CustomException(e,sys)
             

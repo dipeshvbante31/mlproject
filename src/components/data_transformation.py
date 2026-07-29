@@ -39,15 +39,15 @@ class DataTransformation:
             num_pipeline=Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="median")),#handling the missing value with median as stratagy
-                    ("scaler",StandardScaler())
+                    ("scaler",StandardScaler())# for scaling the numerical data into machine understandable form
 
                 ]
             )
             cat_pipeline=Pipeline(
                 steps=[
-                    ("imputer",SimpleImputer(strategy="most_frequent")),
-                    ("one hot encoder",OneHotEncoder()),
-                    ("scaler",StandardScaler(with_mean=False))
+                    ("imputer",SimpleImputer(strategy="most_frequent")), # to remove an nan value and fill with most_frequent
+                    ("one hot encoder",OneHotEncoder()), # to convert categorical data into numerical data
+                    ("scaler",StandardScaler(with_mean=False)) # for scaling the numerical data into machine understandable form
                 ]
 
 
@@ -76,16 +76,16 @@ class DataTransformation:
             train_df=pd.read_csv(train_path)
             test_df=pd.read_csv(test_path)
 
-            logging.info("Readong the test and train data is completed ")
+            logging.info("Reading the test and train data is completed ")
 
-            logging.info("obtaiing the preprocessor object")
+            logging.info("obtaining the preprocessor object")
 
 
             preprocessor_object = self.get_data_transformer_object()
 
             target_column_name="math_score"
 
-            numerical_column=["writing score","reading score"]
+            numerical_column=["writing_score","reading_score"]
 
             input_feature_train_df=train_df.drop(columns=[target_column_name])
             target_feature_train_df=train_df[target_column_name]
